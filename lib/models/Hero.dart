@@ -1,17 +1,17 @@
 class HeroHub {
-  List<Hero> heroes;
+  List<DotaHero> heroes;
 
   HeroHub({this.heroes});
 
   HeroHub.fromJson(Map<String, dynamic> json) {
-    heroes = new List<Hero>();
+    heroes = new List<DotaHero>();
     json.keys.forEach((key) {
-      heroes.add(new Hero.fromJson(json[key]));
+      heroes.add(new DotaHero.fromJson(json[key]));
     });
   }
 }
 
-class Hero {
+class DotaHero {
   int id;
   String name;
   String localizedName;
@@ -42,7 +42,7 @@ class Hero {
   bool cmEnabled;
   int legs;
 
-  Hero(
+  DotaHero(
       {this.id,
       this.name,
       this.localizedName,
@@ -73,7 +73,7 @@ class Hero {
       this.cmEnabled,
       this.legs});
 
-  Hero.fromJson(Map<String, dynamic> json) {
+  DotaHero.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     localizedName = json['localized_name'];
@@ -138,4 +138,22 @@ class Hero {
     data['legs'] = this.legs;
     return data;
   }
+//  static List<DotaHero> fetchAll() {
+//
+//  }
+
+//  static DotaHero fetchByID(int heroID) {
+//    //fetch all locations, iterate them and when we find the location
+//    //with the id we want, return immediately
+//    List<DotaHero> heroes = DotaHero.fetchAll();
+//    for (var i = 0; i < heroes.length; i++){
+//      if (heroes[i].id == heroID){
+//        return heroes[i];
+//      }
+//    }
+//    return null;
+//  }
+
+
+
 }

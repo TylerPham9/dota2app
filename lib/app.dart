@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'models/Hero.dart';
 import 'screens/heroes.dart';
+import 'package:dota2app/screens/hero_detail/hero_detail.dart';
 
 const HeroesUrl =
     'https://raw.githubusercontent.com/odota/dotaconstants/master/build/heroes.json';
@@ -16,9 +17,26 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Dota 2 Heroes',
-      home: HomePage(),
+      onGenerateRoute: _routes(),
     );
+  }
+
+  RouteFactory _routes() {
+    return (settings) {
+      final Map<String, dynamic> arguments = settings.arguments;
+      Widget screen;
+      switch (settings.name) {
+        case HeroesRoute:
+          screen = HomePage();
+          break;
+        case HeroDetailRoute:
+          screen = HeroDetail(arguments['hero']);
+          break;
+        default:
+          return null;
+      }
+      return MaterialPageRoute(builder: (BuildContext context) => screen);
+    };
   }
 }
 
