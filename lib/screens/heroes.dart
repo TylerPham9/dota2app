@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:dota2app/models/Hero.dart';
 import 'package:dota2app/app.dart';
 
-const ImageHost = 'http://cdn.dota2.com';
-
 class Heroes extends StatelessWidget {
   final HeroHub heroHub;
 
@@ -42,8 +40,7 @@ class Heroes extends StatelessWidget {
                                     height: 50.0,
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
-                                            image: NetworkImage(
-                                                ImageHost + hero.img),
+                                            image: NetworkImage(hero.img),
                                             fit: BoxFit.fitWidth)),
                                   ),
                                   Text(

@@ -1,3 +1,5 @@
+const ImageHost = 'http://cdn.dota2.com';
+
 class HeroHub {
   List<DotaHero> heroes;
 
@@ -80,7 +82,7 @@ class DotaHero {
     primaryAttr = json['primary_attr'];
     attackType = json['attack_type'];
     roles = json['roles'].cast<String>();
-    img = json['img'];
+    img = ImageHost + json['img'];
     icon = json['icon'];
     baseHealth = json['base_health'];
     baseHealthRegen = (json['base_health_regen'] == null)? 0.0 : json['base_health_regen'].toDouble();
