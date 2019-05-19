@@ -18,6 +18,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       onGenerateRoute: _routes(),
+      theme: _theme(),
     );
   }
 
@@ -37,6 +38,15 @@ class App extends StatelessWidget {
       }
       return MaterialPageRoute(builder: (BuildContext context) => screen);
     };
+  }
+
+  ThemeData _theme() {
+    return ThemeData(
+      textTheme: TextTheme(
+        title: TitleTextStyle,
+        body1: Body1TextStyle,
+      )
+    );
   }
 }
 
@@ -69,3 +79,5 @@ class HomePageState extends State<HomePage> {
     return Heroes(heroHub);
   }
 }
+
+
