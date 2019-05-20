@@ -98,78 +98,188 @@ class HeroDetail extends StatelessWidget {
   }
 
   List<Stat> heroDetailsCalculation(DotaHero hero) {
+
     List<Stat> stats = [];
+    int lvl15 = 14;
+    int lvl25 = 24;
+
+
     final Stat str = new Stat(
         'Str',
         '0',
         hero.baseStr.toString(),
-        (hero.baseStr.toDouble() + (14.0 * hero.strGain).round())
+        (hero.baseStr.toDouble() + (lvl15 * hero.strGain).round())
             .toInt()
             .toString(),
-        (hero.baseStr.toDouble() + (24.0 * hero.strGain).round())
+        (hero.baseStr.toDouble() + (lvl25 * hero.strGain).round())
             .toInt()
             .toString());
     final Stat intel = new Stat(
         'Int',
         '0',
         hero.baseInt.toString(),
-        (hero.baseInt.toDouble() + (14.0 * hero.intGain).round())
+        (hero.baseInt.toDouble() + (lvl15 * hero.intGain).round())
             .toInt()
             .toString(),
-        (hero.baseInt.toDouble() + (24.0 * hero.intGain).round())
+        (hero.baseInt.toDouble() + (lvl25 * hero.intGain).round())
             .toInt()
             .toString());
     final Stat agi = new Stat(
         'Agi',
         '0',
         hero.baseAgi.toString(),
-        (hero.baseAgi.toDouble() + (14.0 * hero.agiGain).round())
+        (hero.baseAgi.toDouble() + (lvl15 * hero.agiGain).round())
             .toInt()
             .toString(),
-        (hero.baseAgi.toDouble() + (24.0 * hero.agiGain).round())
+        (hero.baseAgi.toDouble() + (lvl25 * hero.agiGain).round())
             .toInt()
             .toString());
 
+    int healthPerStr = 20;
     final Stat health = new Stat(
       'Health',
       hero.baseHealth.toString(),
-      (hero.baseHealth.toDouble() + 20 * double.parse(str.lvl1)).toString(),
-      (hero.baseHealth.toDouble() + 20 * double.parse(str.lvl15)).toString(),
-      (hero.baseHealth.toDouble() + 20 * double.parse(str.lvl25)).toString(),
+      (hero.baseHealth.toDouble() + healthPerStr * double.parse(str.lvl1)).toString(),
+      (hero.baseHealth.toDouble() + healthPerStr * double.parse(str.lvl15)).toString(),
+      (hero.baseHealth.toDouble() + healthPerStr * double.parse(str.lvl25)).toString(),
     );
+
+    double hRegenPerStr = 0.1;
     final Stat hRegen = new Stat(
       'Health Regen',
       hero.baseHealthRegen.toString(),
-      (hero.baseHealthRegen + 0.1 * double.parse(str.lvl1)).toStringAsFixed(2),
-      (hero.baseHealthRegen + 0.1 * double.parse(str.lvl15)).toStringAsFixed(2),
-      (hero.baseHealthRegen + 0.1 * double.parse(str.lvl25)).toStringAsFixed(2),
+      (hero.baseHealthRegen + hRegenPerStr * double.parse(str.lvl1)).toStringAsFixed(2),
+      (hero.baseHealthRegen + hRegenPerStr * double.parse(str.lvl15)).toStringAsFixed(2),
+      (hero.baseHealthRegen + hRegenPerStr * double.parse(str.lvl25)).toStringAsFixed(2),
     );
+
+    double mResPerStr = 0.08;
     final Stat magicRes = new Stat(
       'Magic Res',
       hero.baseMr.toString() + '%',
-      (hero.baseMr + 0.08 * double.parse(str.lvl1)).toStringAsFixed(2) + '%',
-      (hero.baseMr + 0.08 * double.parse(str.lvl15)).toStringAsFixed(2) + '%',
-      (hero.baseMr + 0.08 * double.parse(str.lvl25)).toStringAsFixed(2) + '%',
+//      (1-(1-(hero.baseMr/100))*(1-1.84)).toStringAsFixed(2) + '%',
+//      (1-(1-(hero.baseMr/100))*(1-1.84)).toStringAsFixed(2) + '%',
+      (1 - (1 - hero.baseMr/100)*(1 - mResPerStr * double.parse(str.lvl1)))
+            .toStringAsFixed(2) + '%',
+      (1 - (1 - hero.baseMr/100)*(1 - mResPerStr * double.parse(str.lvl15)))
+          .toStringAsFixed(2) + '%',
+      (1 - (1 - hero.baseMr/100)*(1 - mResPerStr * double.parse(str.lvl25)))
+          .toStringAsFixed(2) + '%',
     );
 
+    int manaPerIntel = 12;
     final Stat mana = new Stat(
       'Mana',
       hero.baseMana.toString(),
-      (hero.baseMana.toInt() + 12 * int.parse(intel.lvl1)).toString(),
-      (hero.baseMana.toInt() + 12 * int.parse(intel.lvl15)).toString(),
-      (hero.baseMana.toInt() + 12 * int.parse(intel.lvl25)).toString(),
+      (hero.baseMana.toInt() + manaPerIntel * int.parse(intel.lvl1)).toString(),
+      (hero.baseMana.toInt() + manaPerIntel * int.parse(intel.lvl15)).toString(),
+      (hero.baseMana.toInt() + manaPerIntel * int.parse(intel.lvl25)).toString(),
     );
+
+    double spellDmgPerIntel = 0.07;
     final Stat spellDmg = new Stat(
       'Spell Dmg',
       '0',
-      (0.07 * double.parse(intel.lvl1)).toString(),
-      (0.07 * double.parse(intel.lvl15)).toString(),
-      (0.07 * double.parse(intel.lvl25)).toString(),
+      (spellDmgPerIntel * double.parse(intel.lvl1)).toStringAsFixed(2) + '%',
+      (spellDmgPerIntel * double.parse(intel.lvl15)).toStringAsFixed(2) + '%',
+      (spellDmgPerIntel * double.parse(intel.lvl25)).toStringAsFixed(2) + '%',
     );
 
-    stats.add(str);
+    double mRegenPerIntel = 0.05;
+    final Stat mRegen = new Stat(
+      'Mana Regen',
+      hero.baseManaRegen.toString(),
+      (hero.baseManaRegen + mRegenPerIntel * double.parse(intel.lvl1))
+          .toStringAsFixed(2),
+      (hero.baseManaRegen + mRegenPerIntel * double.parse(intel.lvl15))
+          .toStringAsFixed(2),
+      (hero.baseManaRegen + mRegenPerIntel * double.parse(intel.lvl25))
+          .toStringAsFixed(2),
+    );
+
+    double armorPerAgi = 0.16;
+    final Stat armor = new Stat(
+      'Armor',
+      hero.baseArmor.toString(),
+      (hero.baseArmor + armorPerAgi * double.parse(agi.lvl1))
+          .toStringAsFixed(2),
+      (hero.baseArmor + armorPerAgi * double.parse(agi.lvl15))
+          .toStringAsFixed(2),
+      (hero.baseArmor + armorPerAgi * double.parse(agi.lvl25))
+          .toStringAsFixed(2),
+    );
+
+    final Stat atkspeed = new Stat(
+      'Att/sec',
+      hero.attackRate.toString(),
+      (((100 + double.parse(agi.lvl1)) * 0.01) / hero.attackRate)
+          .toStringAsFixed(2),
+      (((100 + double.parse(agi.lvl15)) * 0.01) / hero.attackRate)
+          .toStringAsFixed(2),
+      (((100 + double.parse(agi.lvl25)) * 0.01) / hero.attackRate)
+          .toStringAsFixed(2),
+    );
+
+    double moveSpPerAgi = 0.05;
+    final Stat moveSpAmp = new Stat(
+      'Move sp amp.',
+      '0%',
+      (moveSpPerAgi * double.parse(agi.lvl1)).toStringAsFixed(2) + '%',
+      (moveSpPerAgi * double.parse(agi.lvl15)).toStringAsFixed(2) + '%',
+      (moveSpPerAgi * double.parse(agi.lvl25)).toStringAsFixed(2) + '%',
+    );
+
+    int bonusDmgLvl1;
+    int bonusDmgLvl15;
+    int bonusDmgLvl25;
+
+    switch (hero.primaryAttr) {
+      case "agi":
+        {
+          bonusDmgLvl1 = int.parse(agi.lvl1);
+          bonusDmgLvl15 = int.parse(agi.lvl15);
+          bonusDmgLvl25 = int.parse(agi.lvl25);
+        }
+        break;
+      case "str":
+        {
+          bonusDmgLvl1 = int.parse(str.lvl1);
+          bonusDmgLvl15 = int.parse(str.lvl15);
+          bonusDmgLvl25 = int.parse(str.lvl25);
+        }
+        break;
+      case "int":
+        {
+          bonusDmgLvl1 = int.parse(intel.lvl1);
+          bonusDmgLvl15 = int.parse(intel.lvl15);
+          bonusDmgLvl25 = int.parse(intel.lvl25);
+        }
+        break;
+      default:
+        break;
+    }
+
+    final Stat damage = new Stat(
+      'Damage',
+      hero.baseAttackMin.toString() + '-' + hero.baseAttackMax.toString(),
+      ((hero.baseAttackMin + bonusDmgLvl1).toString() + '-' +
+          (hero.baseAttackMax + bonusDmgLvl1).toString()),
+      ((hero.baseAttackMin + bonusDmgLvl15).toString() + '-' +
+          (hero.baseAttackMax + bonusDmgLvl15).toString()),
+      ((hero.baseAttackMin + bonusDmgLvl25).toString() + '-' +
+          (hero.baseAttackMax + bonusDmgLvl25).toString()),
+    );
+
     stats.add(health);
     stats.add(hRegen);
+    stats.add(magicRes);
+    stats.add(mana);
+    stats.add(mRegen);
+    stats.add(spellDmg);
+    stats.add(armor);
+    stats.add(atkspeed);
+    stats.add(moveSpAmp);
+    stats.add(damage);
 
     return stats;
   }
