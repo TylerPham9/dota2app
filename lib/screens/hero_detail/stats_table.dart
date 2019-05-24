@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:dota2app/models/Hero.dart';
 import 'package:dota2app/models/Stat.dart';
 import 'package:dota2app/screens/hero_detail/calculations.dart';
+import 'package:dota2app/style.dart';
+import 'stats_table_cell.dart';
 
-const double _cellPadding = 8.0;
-const TextStyle _bold = TextStyle(fontWeight: FontWeight.bold);
+
 
 class StatsTable extends StatelessWidget {
   final DotaHero _dotaHero;
@@ -13,43 +14,32 @@ class StatsTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final stats = statsCalc(_dotaHero);
+    final stats = _statsCalc(_dotaHero);
     return Table(
       border: TableBorder.all(width: 1.0, color: Colors.grey),
+//      border: TableBorder(bottom: BorderSide(color: Colors.grey, width: 1.0)),
       children: [
         TableRow(children: _titleCells()),
       ]..addAll(
-          stats.map((stat) => TableRow(children: heroDetailsTableRow(stat)))),
+          stats.map((stat) => TableRow(children: _statsTableRow(stat)))),
     );
   }
 
   List<TableCell> _titleCells() {
     List<String> titles = ['Level', 'Base', '1', '15', '25'];
     return titles
-        .map((title) => TableCell(
-                child: Padding(
-              padding: const EdgeInsets.all(_cellPadding),
-              child: Text(title, style: _bold),
-            )))
+        .map((title) => statsTableCell(title, true))
         .toList();
   }
 
-  List<TableCell> heroDetailsTableRow(Stat stat) {
+  List<TableCell> _statsTableRow(Stat stat) {
     List<String> stats = [stat.base, stat.lvl01, stat.lvl15, stat.lvl25];
     return [
-      TableCell(
-          child: Padding(
-        padding: const EdgeInsets.all(_cellPadding),
-        child: Text(stat.name, style: _bold),
-      ))
-    ]..addAll(stats.map((stat) => TableCell(
-            child: Padding(
-          padding: const EdgeInsets.all(_cellPadding),
-          child: Text(stat),
-        ))));
+      statsTableCell(stat.name, true)
+    ]..addAll(stats.map((stat) => statsTableCell(stat, false)));
   }
 
-  List<Stat> statsCalc(DotaHero hero) {
+  List<Stat> _statsCalc(DotaHero hero) {
     List<Stat> stats = [];
     int _lvl01 = 0;
     int _lvl15 = 14;

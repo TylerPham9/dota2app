@@ -4,7 +4,14 @@ const LargeTextSize = 26.0;
 const MediumTextSize = 20.0;
 const BodyTextSize = 14.0;
 
+const TextStyle boldTextStyle = TextStyle(fontWeight: FontWeight.bold);
+
 const String FontNameDefault = 'Trajan';
+
+const CellPadding = EdgeInsets.all(8.0);
+const BorderSide TableBorderWidth = BorderSide(width: 1.0, color: Colors.grey);
+
+
 
 const AppBarTextStyle = TextStyle(
   fontFamily: FontNameDefault,
