@@ -34,7 +34,7 @@ String spellDmgCalc(String intel) {
   return (_spellDmgPerIntel * double.parse(intel)).toStringAsFixed(2) + '%';
 }
 
-String mRegenCalc(int base, String intel) {
+String mRegenCalc(double base, String intel) {
   return (base + _mRegenPerIntel * double.parse(intel)).toStringAsFixed(2);
 }
 

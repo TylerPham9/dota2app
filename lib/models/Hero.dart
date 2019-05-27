@@ -1,15 +1,77 @@
 const ImageHost = 'http://cdn.dota2.com';
 
-class HeroHub {
-  List<DotaHero> heroes;
+//class HeroList {
+//  List<DotaHero> heroes;
+//  HeroList({this.heroes});
+//
+//  HeroList.fromJson(Map<String, dynamic> json) {
+//    heroes = new List<DotaHero>();
+//    json.keys.forEach((key) {
+//      heroes.add(new DotaHero.fromJson(json[key]));
+//    });
+//
+//    heroes.sort((a, b) {
+//      return a.localizedName.toLowerCase().compareTo(
+//          b.localizedName.toLowerCase());
+//    });
+//  }
+//}
 
-  HeroHub({this.heroes});
+class HeroList {
+  Map<String, List<DotaHero>> heroes;
+  List<DotaHero> agiHeroes;
+  List<DotaHero> strHeroes;
+  List<DotaHero> intHeroes;
 
-  HeroHub.fromJson(Map<String, dynamic> json) {
-    heroes = new List<DotaHero>();
+  HeroList({this.heroes});
+
+  HeroList.fromJson(Map<String, dynamic> json) {
+    heroes = new Map<String, List<DotaHero>>();
+    agiHeroes = new List<DotaHero>();
+    strHeroes = new List<DotaHero>();
+    intHeroes = new List<DotaHero>();
+
     json.keys.forEach((key) {
-      heroes.add(new DotaHero.fromJson(json[key]));
+      DotaHero temp = new DotaHero.fromJson(json[key]);
+      switch (temp.primaryAttr) {
+        case('str'):
+          {
+            strHeroes.add(temp);
+          }
+          break;
+        case('agi'):
+          {
+            agiHeroes.add(temp);
+          }
+          break;
+        case('int'):
+          {
+            intHeroes.add(temp);
+          }
+          break;
+        default:
+          break;
+      }
     });
+    agiHeroes.sort((a, b) {
+      return sortByName(a, b);
+    });
+    strHeroes.sort((a, b) {
+      return sortByName(a, b);
+    });
+    intHeroes.sort((a, b) {
+      return sortByName(a, b);
+    });
+
+    heroes['str'] = strHeroes;
+    heroes['agi'] = agiHeroes;
+    heroes['int'] = intHeroes;
+
+  }
+
+  int sortByName(DotaHero a, DotaHero b) {
+    return a.localizedName.toLowerCase().compareTo(
+        b.localizedName.toLowerCase());
   }
 }
 
@@ -25,7 +87,7 @@ class DotaHero {
   int baseHealth;
   double baseHealthRegen;
   int baseMana;
-  int baseManaRegen;
+  double baseManaRegen;
   double baseArmor;
   int baseMr;
   int baseAttackMin;
@@ -87,7 +149,7 @@ class DotaHero {
     baseHealth = json['base_health'];
     baseHealthRegen = (json['base_health_regen'] == null)? 0.0 : json['base_health_regen'].toDouble();
     baseMana = json['base_mana'];
-    baseManaRegen = json['base_mana_regen'];
+    baseManaRegen = json['base_mana_regen'].toDouble();
     baseArmor = json['base_armor'].toDouble();
     baseMr = json['base_mr'];
     baseAttackMin = json['base_attack_min'];

@@ -59,7 +59,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  HeroHub heroHub;
+  HeroList heroList;
 
   @override
   initState() {
@@ -70,14 +70,14 @@ class HomePageState extends State<HomePage> {
   fetchData() async {
     var res = await http.get(HeroesUrl);
     var decodedJson = jsonDecode(res.body);
-    heroHub = HeroHub.fromJson(decodedJson);
+    heroList = HeroList.fromJson(decodedJson);
     print("Download Done!");
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return Heroes(heroHub);
+    return Heroes(heroList);
   }
 }
 
