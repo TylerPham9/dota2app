@@ -12,7 +12,6 @@ const HeroesUrl =
 const HeroesRoute = '/';
 const HeroDetailRoute = '/hero_detail';
 
-
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -42,12 +41,15 @@ class App extends StatelessWidget {
 
   ThemeData _theme() {
     return ThemeData(
-      textTheme: TextTheme(
-        title: TitleTextStyle,
-        body1: Body1TextStyle,
-      ),
+        textTheme: TextTheme(
+          title: TitleTextStyle,
+          body1: Body1TextStyle,
+        ),
+        brightness: Brightness.light,
+        primaryColor: Colors.pink,
+        accentColor: Colors.cyan[600]
 //        scaffoldBackgroundColor: Color(0xff2F363D),
-    );
+        );
   }
 }
 
@@ -80,5 +82,3 @@ class HomePageState extends State<HomePage> {
     return Heroes(heroList);
   }
 }
-
-

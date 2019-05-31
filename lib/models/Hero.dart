@@ -19,59 +19,59 @@ const ImageHost = 'http://cdn.dota2.com';
 
 class HeroList {
   Map<String, List<DotaHero>> heroes;
-  List<DotaHero> agiHeroes;
-  List<DotaHero> strHeroes;
-  List<DotaHero> intHeroes;
+  List<DotaHero> _agiHeroes;
+  List<DotaHero> _strHeroes;
+  List<DotaHero> _intHeroes;
 
   HeroList({this.heroes});
 
   HeroList.fromJson(Map<String, dynamic> json) {
     heroes = new Map<String, List<DotaHero>>();
-    agiHeroes = new List<DotaHero>();
-    strHeroes = new List<DotaHero>();
-    intHeroes = new List<DotaHero>();
+    _agiHeroes = new List<DotaHero>();
+    _strHeroes = new List<DotaHero>();
+    _intHeroes = new List<DotaHero>();
 
     json.keys.forEach((key) {
       DotaHero temp = new DotaHero.fromJson(json[key]);
       switch (temp.primaryAttr) {
-        case('str'):
+        case ('str'):
           {
-            strHeroes.add(temp);
+            _strHeroes.add(temp);
           }
           break;
-        case('agi'):
+        case ('agi'):
           {
-            agiHeroes.add(temp);
+            _agiHeroes.add(temp);
           }
           break;
-        case('int'):
+        case ('int'):
           {
-            intHeroes.add(temp);
+            _intHeroes.add(temp);
           }
           break;
         default:
           break;
       }
     });
-    agiHeroes.sort((a, b) {
+    _agiHeroes.sort((a, b) {
       return sortByName(a, b);
     });
-    strHeroes.sort((a, b) {
+    _strHeroes.sort((a, b) {
       return sortByName(a, b);
     });
-    intHeroes.sort((a, b) {
+    _intHeroes.sort((a, b) {
       return sortByName(a, b);
     });
 
-    heroes['str'] = strHeroes;
-    heroes['agi'] = agiHeroes;
-    heroes['int'] = intHeroes;
-
+    heroes['str'] = _strHeroes;
+    heroes['agi'] = _agiHeroes;
+    heroes['int'] = _intHeroes;
   }
 
   int sortByName(DotaHero a, DotaHero b) {
-    return a.localizedName.toLowerCase().compareTo(
-        b.localizedName.toLowerCase());
+    return a.localizedName
+        .toLowerCase()
+        .compareTo(b.localizedName.toLowerCase());
   }
 }
 
@@ -147,7 +147,9 @@ class DotaHero {
     img = ImageHost + json['img'];
     icon = json['icon'];
     baseHealth = json['base_health'];
-    baseHealthRegen = (json['base_health_regen'] == null)? 0.0 : json['base_health_regen'].toDouble();
+    baseHealthRegen = (json['base_health_regen'] == null)
+        ? 0.0
+        : json['base_health_regen'].toDouble();
     baseMana = json['base_mana'];
     baseManaRegen = json['base_mana_regen'].toDouble();
     baseArmor = json['base_armor'].toDouble();
@@ -217,7 +219,5 @@ class DotaHero {
 //    }
 //    return null;
 //  }
-
-
 
 }
