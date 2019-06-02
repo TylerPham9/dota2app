@@ -35,6 +35,7 @@ class HeroDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(_dotaHero.localizedName),
+        backgroundColor: attrColors[_dotaHero.primaryAttr],
       ),
       body: SingleChildScrollView(
         child: Column(mainAxisAlignment: MainAxisAlignment.start,

@@ -1,22 +1,5 @@
 const ImageHost = 'http://cdn.dota2.com';
 
-//class HeroList {
-//  List<DotaHero> heroes;
-//  HeroList({this.heroes});
-//
-//  HeroList.fromJson(Map<String, dynamic> json) {
-//    heroes = new List<DotaHero>();
-//    json.keys.forEach((key) {
-//      heroes.add(new DotaHero.fromJson(json[key]));
-//    });
-//
-//    heroes.sort((a, b) {
-//      return a.localizedName.toLowerCase().compareTo(
-//          b.localizedName.toLowerCase());
-//    });
-//  }
-//}
-
 class HeroList {
   Map<String, List<DotaHero>> heroes;
   List<DotaHero> _agiHeroes;

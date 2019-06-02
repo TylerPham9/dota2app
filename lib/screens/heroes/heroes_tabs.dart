@@ -99,10 +99,8 @@ class _HeroesTabsState extends State<HeroesTabs>
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: GridView.builder(
             itemCount: heroes.length,
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                childAspectRatio: 1.2),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, childAspectRatio: 1.2),
             itemBuilder: (BuildContext context, int index) {
               return _cardGenerator(context, heroes[index]);
             }),
@@ -129,20 +127,23 @@ class _HeroesTabsState extends State<HeroesTabs>
                 Expanded(
                   flex: 2,
                   child: Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(hero.img), fit: BoxFit.fitWidth)),
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(hero.img),
+                            fit: BoxFit.fitWidth)),
                   ),
                 ),
                 Expanded(
                   flex: 1,
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 2.0),
-                    child: Text(
-                      hero.localizedName,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
+                    child: Center(
+                      child: Text(
+                        hero.localizedName,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ),
                     ),
                   ),
                 )
@@ -155,8 +156,6 @@ class _HeroesTabsState extends State<HeroesTabs>
   }
 
   _onHeroTap(BuildContext context, DotaHero hero) {
-//  _onHeroTap(BuildContext context, int heroID) {
     Navigator.pushNamed(context, HeroDetailRoute, arguments: {"hero": hero});
-//    Navigator.pushNamed(context, HeroDetailRoute, arguments: {"id": heroID});
   }
 }
