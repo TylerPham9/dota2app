@@ -11,7 +11,11 @@ const String FontNameDefault = 'Trajan';
 const CellPadding = EdgeInsets.all(8.0);
 const BorderSide TableBorderWidth = BorderSide(width: 1.0, color: Colors.grey);
 
-
+const attrColors = {
+  'str': Color(0xFFB9500B),
+  'agi': Color(0xFF167C13),
+  'int': Color(0xFF257DAE)
+};
 
 const AppBarTextStyle = TextStyle(
   fontFamily: FontNameDefault,
