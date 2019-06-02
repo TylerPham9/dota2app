@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:dota2app/style.dart';
 
 class AttributeDetail extends StatelessWidget {
   final String _attr;
   final int _attrBase;
   final double _attrGain;
   final String _primaryAttr;
-  final colorMap = {'str': Colors.red, 'agi': Colors.green, 'int': Colors.blue};
   final iconMap = {
     'str': "assets/icons/strIcon.png",
     'agi': "assets/icons/agiIcon.png",
@@ -30,7 +30,7 @@ class AttributeDetail extends StatelessWidget {
           children: <Widget>[
             Container(
                 child: Text(_attrBase.toString(),
-                    style: TextStyle(color: colorMap[_attr]))),
+                    style: TextStyle(color: attrColors[_attr]))),
             Container(child: Text(' + ' + _attrGain.toString())),
           ],
         )
