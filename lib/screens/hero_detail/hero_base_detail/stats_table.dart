@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:dota2app/models/Hero.dart';
 import 'package:dota2app/models/Stat.dart';
-import 'package:dota2app/screens/hero_detail/calculations.dart';
+import 'package:dota2app/screens/hero_detail/hero_base_detail/calculations.dart';
 import 'package:dota2app/style.dart';
-import 'stats_table_cell.dart';
+import 'package:dota2app/screens/hero_detail/hero_base_detail/stats_table_cell.dart';
 
 
 

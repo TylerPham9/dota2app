@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dota2app/models/Hero.dart';
+import 'package:dota2app/models/Talents.dart';
 import 'package:dota2app/screens/heroes/heroes_tabs.dart';
 
 import 'package:http/http.dart' as http;
@@ -7,6 +8,9 @@ import 'dart:convert';
 
 const HeroesUrl =
     'https://raw.githubusercontent.com/odota/dotaconstants/master/build/heroes.json';
+const HeroAbilitiesUrl =
+    'https://raw.githubusercontent.com/odota/dotaconstants/master/build/hero_abilities.json';
+
 
 class Heroes extends StatefulWidget {
   @override
@@ -17,6 +21,7 @@ class Heroes extends StatefulWidget {
 
 class HeroesState extends State<Heroes> {
   HeroList heroList;
+  AbilityTalentList ATList;
 
   @override
   initState() {
@@ -25,9 +30,16 @@ class HeroesState extends State<Heroes> {
   }
 
   fetchData() async {
-    var res = await http.get(HeroesUrl);
-    var decodedJson = jsonDecode(res.body);
-    heroList = HeroList.fromJson(decodedJson);
+    var heroesRes = await http.get(HeroesUrl);
+    var decodedHeroesJson = jsonDecode(heroesRes.body);
+
+    var heroAbilitiesRes = await http.get(HeroAbilitiesUrl);
+    var decodedHeroesAbilitiesJson = jsonDecode(heroAbilitiesRes.body);
+
+
+    ATList = AbilityTalentList.fromJson(decodedHeroesAbilitiesJson);
+    print(ATList);
+    heroList = HeroList.fromJson(decodedHeroesJson);
     print("Download Done!");
     setState(() {});
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'stats_table_cell.dart';
+import 'package:dota2app/screens/hero_detail/hero_base_detail/stats_table_cell.dart';
 import 'package:dota2app/style.dart';
 
 class AdditionalDetailTable extends StatelessWidget {
