@@ -10,6 +10,8 @@ const HeroesUrl =
     'https://raw.githubusercontent.com/odota/dotaconstants/master/build/heroes.json';
 const HeroAbilitiesUrl =
     'https://raw.githubusercontent.com/odota/dotaconstants/master/build/hero_abilities.json';
+const AbilitiesUrl =
+    'https://raw.githubusercontent.com/odota/dotaconstants/master/build/abilities.json';
 
 
 class Heroes extends StatefulWidget {
@@ -38,8 +40,9 @@ class HeroesState extends State<Heroes> {
 
 
     ATList = AbilityTalentList.fromJson(decodedHeroesAbilitiesJson);
-    print(ATList);
-    heroList = HeroList.fromJson(decodedHeroesJson);
+//    print(ATList);
+//    ATList.ATList['npc_dota_hero_axe']
+    heroList = HeroList.fromJson(decodedHeroesJson, ATList.Talents);
     print("Download Done!");
     setState(() {});
   }

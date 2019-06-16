@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:dota2app/models/Hero.dart';
 import 'package:dota2app/screens/hero_detail/hero_base_detail/hero_base_detail.dart';
+import 'package:dota2app/screens/hero_detail/hero_talents/hero_talents.dart';
 
 import 'package:dota2app/style.dart';
 
@@ -23,11 +24,7 @@ class HeroDetail extends StatelessWidget {
                   tabs: [Tab(text: 'Base Details'), Tab(text: 'Talents')])),
           body: TabBarView(children: [
             HeroBaseDetail(_dotaHero),
-            Container(
-              child: Center(
-                child: Text('TALENTS PAGE'),
-              ),
-            )
+            HeroTalents(),
           ]),
         ));
   }

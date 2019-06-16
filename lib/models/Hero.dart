@@ -1,3 +1,5 @@
+import 'package:dota2app/models/Talents.dart';
+
 const ImageHost = 'http://cdn.dota2.com';
 
 class HeroList {
@@ -8,7 +10,7 @@ class HeroList {
 
   HeroList({this.heroes});
 
-  HeroList.fromJson(Map<String, dynamic> json) {
+  HeroList.fromJson(Map<String, dynamic> json, Map<String, List<Talent>> talents) {
     heroes = new Map<String, List<DotaHero>>();
     _agiHeroes = new List<DotaHero>();
     _strHeroes = new List<DotaHero>();
@@ -16,6 +18,7 @@ class HeroList {
 
     json.keys.forEach((key) {
       DotaHero temp = new DotaHero.fromJson(json[key]);
+      temp.talentTree = new TalentTree(talents[temp.name]);
       switch (temp.primaryAttr) {
         case ('str'):
           {
@@ -88,6 +91,7 @@ class DotaHero {
   double turnRate;
   bool cmEnabled;
   int legs;
+  TalentTree talentTree;
 
   DotaHero(
       {this.id,
@@ -118,7 +122,8 @@ class DotaHero {
       this.moveSpeed,
       this.turnRate,
       this.cmEnabled,
-      this.legs});
+      this.legs,
+      this.talentTree});
 
   DotaHero.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -187,6 +192,8 @@ class DotaHero {
     data['legs'] = this.legs;
     return data;
   }
+
+
 //  static List<DotaHero> fetchAll() {
 //
 //  }
